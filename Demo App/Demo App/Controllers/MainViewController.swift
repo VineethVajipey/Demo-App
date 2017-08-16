@@ -12,18 +12,19 @@ import Firebase
 import FirebaseDatabase
 import CoreLocation
 
-var depType = "Type 1"
+var depType = "Paper"
 var depLocation: Location?
+var approxAddress: String?
 
 class MainViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, CLLocationManagerDelegate{
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var typePicker: UIPickerView!
     @IBOutlet weak var weightTextField: UITextField!
-    @IBOutlet weak var locationPicker: UIPickerView!
+    @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
-    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     
     
     //CORELOCATIONJSLJDLJAKDJLKAJkadSDKFFDF
@@ -61,7 +62,9 @@ class MainViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         
         //(street: CoordinateToAddressService.addStreet , city: CoordinateToAddressService.addCity, zipCode:CoordinateToAddressService.addZip)
         
-        locationLabel.text = CoordinateToAddressService.approxAddress
+        //PRINT LOCATION ON SOME RANDOM LABEL
+        //locationLabel.text = CoordinateToAddressService.approxAddress
+        
         
         depLocation = CoordinateToAddressService.depLocation
         
@@ -77,9 +80,8 @@ class MainViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     
     
     //LKJDLFLSJFLSDJLFJSDKLFJLKSDJFKLJDSL?F
-    
-    var locationOptions = ["Area 1", "Area 2", "Area 3", "Area 4"]
-    var typeOptions = ["Type 1", "Type 2", "Type 3", "Type 4"]
+
+    var typeOptions = ["Paper", "Cardboard", "Metal", "Plastic: PP", "Plastic: HDPE", "Plastic: LDPE", "Plastic: Mixed", "Plastic: LVFM", "Mixed Dry Waste"]
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -88,18 +90,19 @@ class MainViewController: UIViewController, UIPickerViewDataSource, UIPickerView
 
     override func viewDidLoad() {
         super.viewDidLoad()
+         self.hideKeyboardWhenTappedAround() 
         
         //textFields
-        self.weightTextField.delegate = self;
-        self.nameTextField.delegate = self;
-        
-        //locationPikcer
-        locationPicker.dataSource = self
-        locationPicker.delegate = self
+        self.weightTextField.delegate = self
+        self.nameTextField.delegate = self
+        self.priceTextField.delegate = self
         
         //typePicker
         typePicker.dataSource = self
         typePicker.delegate = self
+        
+        backButton.layer.cornerRadius = 24
+        typePicker.layer.cornerRadius = 5
     }
     
     //UIPICKER FUNCTIONS
@@ -114,67 +117,57 @@ class MainViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
                 //print(pickerView.tag)
-                if pickerView.tag == 0 {
-                    return locationOptions.count
-                }
-                else if pickerView.tag == 1{
                     return typeOptions.count
-                }
-                else {
-                    return 0
-                }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         //print(pickerView.tag)
-        if pickerView.tag == 0 {
-            return locationOptions[row]
-        }
-        else {
             return typeOptions[row]
-        }
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
+        depType = typeOptions[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerLabel = view as? UILabel;
         
+        if (pickerLabel == nil)
+        {
+            pickerLabel = UILabel()
+            
+            pickerLabel?.font = UIFont(name: "Avenir", size: 17)
+            pickerLabel?.textAlignment = NSTextAlignment.center
+        }
         
-            if(row == 0)
-            {
-                depType = "Type 0"
-            }
-            else if(row == 1)
-            {
-                depType = "Type 1"
-            }
-            else if(row == 2)
-            {
-                depType = "Type 2"
-            }
-            else
-            {
-                depType = "Type 3"
-            }
+        pickerLabel?.text = fetchLabelForRowNumber(row: row)
         
+        return pickerLabel!;
     }
   
+    func fetchLabelForRowNumber(row: Int) -> String{
+        return typeOptions[row]
+    }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
         
         let depName = nameTextField.text
-        //let date = ServerValue.timestamp()
         let depWeight = weightTextField.text
+        let unitPrice = priceTextField.text
         
         //let userRef = Database.database().reference().child("deposits").childByAutoId()
         //pickerView(pickerView: locationPicker, didSelectRow: 0, inComponent: 0)
         
-        DepositService.create(name: depName!, location: depLocation!, weight: depWeight!, type: depType){ (key) in
+        DepositService.create(name: depName!, location: depLocation!, weight: depWeight!, type: depType, price: unitPrice!){ (key) in
             
-        let firUser = Auth.auth().currentUser        
-        DepositListService.create(firUser: firUser!, depRef: key)
+        //DepositListService.create(firUser: firUser!, depRef: key)
             
         }
     }
+    
+   
+
 }
 
 /*
@@ -194,4 +187,17 @@ class MainViewController: UIViewController, UIPickerViewDataSource, UIPickerView
  }
  })
  */
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
+
 

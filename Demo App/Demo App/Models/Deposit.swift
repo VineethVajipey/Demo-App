@@ -17,17 +17,21 @@ class Deposit: NSObject{
     let location: Location
     let type: String
     var key: String?
-    var creationDate: Date
+    var creationDate: String
+    var creationTime: String
+    let unitPrice: String
     
     // MARK: - Init
     
-    init (name: String, location: Location, weight: String, type: String){
+    init (name: String, location: Location, weight: String, type: String, price: String){
         
         self.name = name
+        self.unitPrice = price
         self.location = location
         self.weight = weight
         self.type = type
-        self.creationDate = Date()
+        self.creationDate = ""
+        self.creationTime = ""
         super.init()
     }
     
@@ -36,15 +40,23 @@ class Deposit: NSObject{
             let name = dict["name"] as? String,
             let weight = dict["weight"] as? String,
             let type = dict["type"] as? String,
-            let time = dict["time"] as? TimeInterval,
-            let location = dict["location"] as? Location
-            else { return nil }
+            let date = dict["date"] as? String,
+            let time = dict["time"] as? String,
+            let locationDict = dict["location"] as? [String: String],
+            let price = dict["unitPrice"] as? String
         
+        
+            else { return nil }
+        let location = Location(street: locationDict["street"]!, city: locationDict["city"]!, zipCode: locationDict["zipCode"]!, address: locationDict["address"]!)
         self.key = snapshot.key
         self.name = name
         self.weight = weight
         self.type = type
-        self.creationDate = Date(timeIntervalSince1970: time)
+        self.creationDate = date
+        self.creationTime = time
         self.location = location
+        self.unitPrice = price
     }
+
+    
 }

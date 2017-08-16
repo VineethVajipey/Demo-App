@@ -11,11 +11,9 @@ import FirebaseDatabase
 
 struct DepositListService {
     
-    
-    
-    static func create(firUser: FIRUser, depRef: String){
+    static func create(firUser: FIRUser){
         
-        let ref = Database.database().reference().child("depositlist").child(firUser.uid).childByAutoId()
+     /*   let ref = Database.database().reference().child("deposits").child(firUser.uid).depRef
             ref.setValue(depRef) { (error, ref)  in
             if let error = error {
                 assertionFailure(error.localizedDescription)
@@ -23,6 +21,6 @@ struct DepositListService {
         }
         //let ref2 = Database.database().reference().child("users").child(firUser.uid)
           //  ref2.setValue(ref.key)
-        
+    */
     }
 }

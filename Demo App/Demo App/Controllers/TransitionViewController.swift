@@ -32,5 +32,6 @@ class TransitionViewController: UIViewController {
         performSegue(withIdentifier: "navToData", sender: UIButton.self)
     }
     
-    
+        @IBAction func unwindToVC1(segue:UIStoryboardSegue) { }
+        
 }

@@ -14,12 +14,14 @@ class Location: NSObject {
     var street: String
     var city: String
     var zipCode: String
+    var approxAddress: String
     
     //INIT
-    init (street: String, city: String, zipCode: String){
+    init (street: String, city: String, zipCode: String, address: String){
         self.street = street
         self.city = city
         self.zipCode = zipCode
+        self.approxAddress = address
         
         super.init()
     }
@@ -27,7 +29,8 @@ class Location: NSObject {
     var dictValue: [String : Any] {
         return ["street" : self.street,
                 "city" : self.city,
-                "zipCode" : self.zipCode]
+                "zipCode" : self.zipCode,
+            "address" : self.approxAddress]
     }
 
     

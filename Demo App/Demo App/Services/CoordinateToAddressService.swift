@@ -1,4 +1,4 @@
- //
+  //
 //  CoordinateToAddressService.swift
 //  Demo App
 //
@@ -49,9 +49,10 @@ static func getAddressFromGeocodeCoordinate(coordinate: CLLocationCoordinate2D) 
         //if let country = placeMark.addressDictionary!["Country"] as? NSString {
         //    addCountry = country
         //}
-        let tempLoc = Location(street: addStreet, city: addCity, zipCode: addZip)
-        depLocation = tempLoc
+        
         approxAddress = "\(addStreet), \(addCity), \(addZip)"
+        let tempLoc = Location(street: addStreet, city: addCity, zipCode: addZip, address: approxAddress!)
+        depLocation = tempLoc
         
     })
     

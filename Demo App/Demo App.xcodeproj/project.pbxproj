@@ -23,9 +23,11 @@
 		2784352B1F300B6E00BF3CC1 /* Deposit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2784352A1F300B6E00BF3CC1 /* Deposit.swift */; };
 		2785FCDA1F38ACD200737401 /* CoordinateToAddressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2785FCD91F38ACD200737401 /* CoordinateToAddressService.swift */; };
 		279870A01F2F72B8002AB9D8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2798709F1F2F72B8002AB9D8 /* User.swift */; };
+		2798BA541F41E2F800A52DC5 /* DisplayDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2798BA531F41E2F800A52DC5 /* DisplayDepositViewController.swift */; };
 		27AB12BA1F34C9B9001CC920 /* Storyboard+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AB12B91F34C9B9001CC920 /* Storyboard+Utility.swift */; };
 		27B2E9671F2A2B8100B24765 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27B2E9661F2A2B8100B24765 /* Assets.xcassets */; };
 		27C2F9D41F30ED6A0020BB40 /* DepositService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C2F9D31F30ED6A0020BB40 /* DepositService.swift */; };
+		27D7B7291F3E40A300AF869F /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D7B7281F3E40A300AF869F /* TableViewCell.swift */; };
 		27E856A61F2647A300C5DC74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E856A51F2647A300C5DC74 /* AppDelegate.swift */; };
 		EE1E055A5C576A33A87A47E5 /* Pods_Demo_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33746A5568893B1EF63DF62F /* Pods_Demo_App.framework */; };
 /* End PBXBuildFile section */
@@ -48,9 +50,11 @@
 		2784352A1F300B6E00BF3CC1 /* Deposit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Deposit.swift; path = Models/Deposit.swift; sourceTree = "<group>"; };
 		2785FCD91F38ACD200737401 /* CoordinateToAddressService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoordinateToAddressService.swift; path = Services/CoordinateToAddressService.swift; sourceTree = "<group>"; };
 		2798709F1F2F72B8002AB9D8 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
+		2798BA531F41E2F800A52DC5 /* DisplayDepositViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisplayDepositViewController.swift; path = Controllers/DisplayDepositViewController.swift; sourceTree = "<group>"; };
 		27AB12B91F34C9B9001CC920 /* Storyboard+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Storyboard+Utility.swift"; path = "Extensions/Storyboard+Utility.swift"; sourceTree = "<group>"; };
 		27B2E9661F2A2B8100B24765 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27C2F9D31F30ED6A0020BB40 /* DepositService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DepositService.swift; path = Services/DepositService.swift; sourceTree = "<group>"; };
+		27D7B7281F3E40A300AF869F /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewCell.swift; path = Views/TableViewCell.swift; sourceTree = "<group>"; };
 		27E856A21F2647A300C5DC74 /* Demo App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		27E856A51F2647A300C5DC74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33746A5568893B1EF63DF62F /* Pods_Demo_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Demo_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +88,7 @@
 			children = (
 				273CC1BF1F28EF43001FD2B8 /* MainViewController.swift */,
 				273CC1C51F29161D001FD2B8 /* LoginViewController.swift */,
+				2798BA531F41E2F800A52DC5 /* DisplayDepositViewController.swift */,
 				2736AFD11F38B84A00E8C975 /* DataViewController.swift */,
 				276BE8421F39FA00003F154A /* TransitionViewController.swift */,
 				278435251F2F9CFF00BF3CC1 /* CreateUsernameViewController.swift */,
@@ -96,6 +101,7 @@
 		2761747E1F3BA6A300B49CD6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				27D7B7281F3E40A300AF869F /* TableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -316,6 +322,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2710C3531F3B844300582B13 /* DepositList.swift in Sources */,
+				27D7B7291F3E40A300AF869F /* TableViewCell.swift in Sources */,
+				2798BA541F41E2F800A52DC5 /* DisplayDepositViewController.swift in Sources */,
 				27C2F9D41F30ED6A0020BB40 /* DepositService.swift in Sources */,
 				279870A01F2F72B8002AB9D8 /* User.swift in Sources */,
 				2710C3551F3B85B200582B13 /* DepositListService.swift in Sources */,

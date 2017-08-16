@@ -13,12 +13,13 @@ import FirebaseAuth.FIRUser
 
 struct DepositService{
     
-    static func create( name: String, location: Location, weight: String, type: String, completion: @escaping(String) -> Void) {
+    static func create( name: String, location: Location, weight: String, type: String, price: String, completion: @escaping(String) -> Void) {
         
-        let userAttrs = ["name": name, "weight": weight, "type": type, "time": ServerValue.timestamp()] as [String : Any]
         
-        let ref = Database.database().reference().child("deposits").childByAutoId()
-        ref.setValue(userAttrs) { (error, ref)  in
+        let userAttrs = ["name": name, "weight": weight, "type": type, "date": dateToString(yourDate: Date()), "time": timeToString(yourDate: Date()), "unitPrice": price] as [String : Any]
+        
+        let ref = Database.database().reference().child("users").child(User.current.uid).child("deposits").childByAutoId()
+        ref.updateChildValues(userAttrs) { (error, ref)  in
             if let error = error {
                 assertionFailure(error.localizedDescription)
             }
@@ -34,6 +35,19 @@ struct DepositService{
         return completion(ref.key)
     }
     
- 
+    static func show(forKey depKey: String, posterUID: String, completion: @escaping (Deposit?) -> Void) {
+        
+        let ref = Database.database().reference().child("users").child(User.current.uid).child("deposits").child(depKey)
+        
+        ref.observeSingleEvent(of: .value, with: { (snapshot) in
+            //guard let deposit = Deposit(snapshot: snapshot) else {
+            guard let deposit = Deposit(snapshot: snapshot) else {
+                return completion(nil)
+            }
+            completion(deposit)
+        })
+    }
+    
+    
     
 }
